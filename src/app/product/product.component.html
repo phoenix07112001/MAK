@@ -1,0 +1,376 @@
+<div class="container mt-5">
+  <ng-template #contentt let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Data</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="name">Product ID</label>
+                    <input type="text" class="form-control" id="ProductId" name="id" placeholder="Enter Product ID" [(ngModel)]="editProduct.Product.id" [readonly]=true>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="name">Product Name</label>
+                    <input type="text" class="form-control" id="TypeName" name="name" placeholder="Enter Product Name" [(ngModel)]="editProduct.Product.name">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="name">Product Description</label>
+                    <input type="text" class="form-control" id="TypeDes" name="desc" placeholder="Enter Product desc" [(ngModel)]="editProduct.Product.desc">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="name">Product sku</label>
+                    <input type="text" class="form-control" id="TypeDes" name="sku" placeholder="Enter Our sku" [(ngModel)]="editProduct.Product.sku">
+                </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                  <label for="name">Product price</label>
+                  <input type="text" class="form-control" id="TypeDes" name="price" placeholder="Enter Our Price" [(ngModel)]="editProduct.Product.price">
+              </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+                <label for="name">Product quantity</label>
+                <input type="text" class="form-control" id="TypeDes" name="quantity" placeholder="Enter quantity" [(ngModel)]="editProduct.Product.quantity">
+            </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+              <label for="name">Product discount_id</label>
+              <input type="text" class="form-control" id="TypeDes" name="discount_id" placeholder="Enter dicount_id" [(ngModel)]="editProduct.Product.discount_id">
+          </div>
+      </div>
+            <!-- <div class="col-3">
+                <div class="form-group">
+                    <label for="name">Brand</label>
+                    <input type="text" class="form-control" id="TypeDes" placeholder="Enter Brand">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="name">Type</label>
+                    <input type="text" class="form-control" id="TypeDes" placeholder="Enter Type">
+                </div>
+            </div> -->
+            <!-- <div class="col-3">
+                <div class="form-group">
+                    <label for="name">Category</label>
+                    <input type="text" class="form-control" id="TypeDes" placeholder="Enter Category">
+                </div>
+            </div> -->
+            <div class="col-4">
+              <div class="form-group">
+                <label for="name">Brand Name</label>
+                <select class="form-control" id="TypeName" name="brand_name" [(ngModel)]="editProduct.Product.brand_name">
+                  <option value="">Select Brand</option>
+                  <option *ngFor="let brandName of brandNames" [value]="brandName">{{ brandName }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="name">Category </label>
+                <select class="form-control" id="TypeName" name="category_name" [(ngModel)]="editProduct.Product.category_name">
+                  <option value="">Select Category</option>
+                  <option *ngFor="let categoryName of categoryNames" [value]="categoryName">{{ categoryName }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="name">Type Name</label>
+                <select class="form-control" id="TypeName" name="type_name" [(ngModel)]="editProduct.Product.type_name">
+                  <option value="">Select Type</option>
+                  <option *ngFor="let typeName of typeNames" [value]="typeName">{{ typeName }}</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="name">Product ImageId</label >
+                    <input type="text" class="form-control" id="TypeDes" name="imageId" placeholder="Enter Product imageId" [(ngModel)]="editProduct.Product.imageId" [readonly]=true>
+                </div>
+            </div>
+
+            <div class="col-4">
+              <label>Product Image</label>
+              <input type="file" class="form-control" id="TypeName" name="TypeName"  [(ngModel)]="editProduct.ImagePath" (change)="onFileChange($event)" accept="image/*" />
+            </div>
+
+            <!-- <div class="col-3">
+                <div class="form-group">
+                    <label for="name">Product Description</label>
+                    <input type="text" class="form-control" id="TypeDes" placeholder="Enter Type Description">
+                </div>
+            </div> -->
+            <!-- <div class="col-3">
+                <button  class="btn btn-primary m-4" (click)="updateRecord()">Submit</button>
+            </div> -->
+        </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="updateRecord()">Save changes</button>
+    </div>
+  </ng-template>
+</div>
+
+
+<div class="container mt-5">
+    <h3>Product Table</h3>
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search">
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block mx-2" (click)="searchTypes()">Search</button>
+                <button class="btn btn-primary" (click)="openEditModal(editedData)">Add New</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Data</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product ID</label>
+                  <input type="text" class="form-control" id="TypeId" name="id" placeholder="Enter Product ID" [(ngModel)]="editedData.Product.id" >
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product Name</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.name">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product desc</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.desc">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product sku</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.sku">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product price</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.price">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product quantity</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.quantity">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product dicount_id</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.discount_id">
+                </div>
+              </div>
+             
+              
+             
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name"> Category </label>
+                  <select class="form-control" id="TypeName" name="category_name" [(ngModel)]="editedData.Product.category_name">
+                    <option value="">Select Category</option>
+                    <option *ngFor="let categoryName of categoryNames" [value]="categoryName">{{ categoryName }}</option>
+                  </select>
+                </div>
+              </div>
+              
+              
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">  Brand Name</label>
+                  <select class="form-control" id="TypeName" name="brand_name" [(ngModel)]="editedData.Product.brand_name">
+                    <option value="">Select Brand</option>
+                    <option *ngFor="let brandName of brandNames" [value]="brandName">{{ brandName }}</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name"> Type Name</label>
+                  <select class="form-control" id="TypeName" name="type_name" [(ngModel)]="editedData.Product.type_name">
+                    <option value="">Select Type</option>
+                    <option *ngFor="let typeName of typeNames" [value]="typeName">{{ typeName }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="name">Product imageId</label>
+                  <input type="text" class="form-control" id="TypeName" name="TypeName" placeholder="Enter Product Name" [(ngModel)]="editedData.Product.ImageId">
+                </div>
+              </div>
+              <div class="col-4">
+                <label>Product Image</label>
+                <input type="file" class="form-control" id="TypeName" name="TypeName"  [(ngModel)]="editedData.ImagePath" (change)="onFileChange($event)" accept="image/*" />
+              </div>
+              
+              
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+          <button type="button" class="btn btn-primary" (click)=" addRecord()">Save changes</button>
+        </div>
+      </ng-template>
+    
+
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th> Name</th>
+                <th> Desc</th>
+                <th> sku</th>
+                <th> price</th>
+                <th> quantity</th>
+
+                <th> discount_id</th>
+                <th> category_name</th>
+                <th> brand_name</th>
+                <th> type_name</th>
+                <th> ImageId</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr>
+              <td>p</td>
+              <td>p</td>
+              <td>p</td>
+              <td>p</td>
+              <td>p</td>
+              <td>p</td>
+              <td>p</td>
+              <td>
+                <button class="btn btn-primary mx-2">Edit</button>
+                <button class="btn btn-primary mx-2"  >Delete</button>
+              </td>
+            </tr>
+            <tr>
+                <td>p</td>
+                <td>p</td>
+                <td>p</td>
+                <td>p</td>
+                <td>p</td>
+                <td>p</td>
+                <td>p</td>
+                <td>
+                  <button class="btn btn-primary mx-2">Edit</button>
+                  <button class="btn btn-primary mx-2"  >Delete</button>
+                </td>
+              </tr> -->
+              <ng-container *ngIf="!searchPerformed">
+                <tr *ngFor="let product of displayedProducts">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.desc }}</td>
+                  <td>{{ product.sku }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.quantity }}</td>
+                  <td>{{ product.discount_id }}</td>
+                  <td>{{ product.category_name }}</td>
+                  <td>{{ product.brand_name }}</td>
+                  <td>{{ product.type_name }}</td>
+                  <td>{{ product.imageId }}</td>
+
+
+
+
+                  <!-- ... Other table columns ... -->
+                  <td>
+                    <button class="btn btn-primary mx-2 my-2" (click)="editRecord(product)" (click)="openEditModal1(editProduct)">Edit</button>
+                    <button class="btn btn-primary mx-2" (click)="deleteRecord(product.id)">Delete</button>
+                  </td>
+                </tr>
+              </ng-container>
+              
+              <!-- Display search results when search has been performed -->
+              <ng-container *ngIf="searchPerformed">
+                <tr *ngFor="let product of displayedTypes">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.desc }}</td>
+                  <td>{{ product.sku }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.quantity }}</td>
+                  <td>{{ product.discount_id }}</td>
+                  <td>{{ product.category_name }}</td>
+                  <td>{{ product.brand_name }}</td>
+                  <td>{{ product.type_name }}</td>
+                  <td>{{ product.imageId }}</td>
+                  <!-- ... Other table columns ... -->
+                  <td>
+                    <button class="btn btn-primary mx-2" (click)="editRecord(product)" (click)="openEditModal1(editProduct)">Edit</button>
+                    <button class="btn btn-primary mx-2" (click)="deleteRecord(product.id)">Delete</button>
+                  </td>
+                </tr>
+              </ng-container>
+            
+          </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+      
+          <!-- Previous Button -->
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="setPage(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+      
+          <!-- Dynamic Page Numbers -->
+          <ng-container *ngFor="let page of getDynamicPageNumbers()">
+            <li class="page-item" [class.active]="currentPage === page">
+              <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+            </li>
+          </ng-container>
+      
+          <!-- Next Button -->
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="setPage(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+      
+        </ul>
+      </nav>
+</div>
